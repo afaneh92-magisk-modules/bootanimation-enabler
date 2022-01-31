@@ -1,6 +1,6 @@
 id=bootanimation-enabler
-name=Bootanimation enabler
-version=V1.0
-versionCode=10
+name=Bootanimation Enabler
+version=V1.1
+versionCode=11
 author=afaneh92
-description=Enable Bootanimation.zip support for Samsung devices.
+description=Enable bootanimation.zip Support for Samsung Devices.

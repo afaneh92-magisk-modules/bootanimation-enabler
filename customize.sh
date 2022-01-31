@@ -7,17 +7,19 @@ unzip -o "$ZIPFILE" module.prop  -d $MODPATH >&2
 # Extract bootanimation files
 unzip -o "$ZIPFILE" "system/*" -d "$MODPATH" >&2;
 
-# paths
-animation=/sdcard/bootanimation.zip
-replace_path="$MODPATH/system/media"
+fatal=true
+for i in /sdcard /data/media/0; do
+  if ! `find $i -type f -name 'bootanimation.zip'` ; then
+    mkdir -p $MODPATH/system/media
+    cp -f -p $i/bootanimation.zip $MODPATH/system/media/
+    ui_print "- Found $i/bootanimation.zip ..."
+    fatal=false
+    break
+  fi
+done
 
-if [ -e "$animation" ]; then
-  cp -f -p $animation $replace_path
-  ui_print "- Found /sdcard/bootanimation.zip ..."
-  ui_print " "
-else
-  ui_print " "
-  ui_print "- Not found /sdcard/bootanimation.zip use pixel instead ..."
+if [ "$fatal" == "true" ]; then
+  ui_print "- Not found bootanimation.zip, using Android default..."
 fi
 
 # Set executable permissions
